@@ -88,7 +88,7 @@
 
 .referral-buttons {
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -168,7 +168,7 @@
 }
 
 .referrals-active .referral-buttons {
-    bottom: 95px;
+    bottom: 80px;
     z-index: 3;
 }
 
