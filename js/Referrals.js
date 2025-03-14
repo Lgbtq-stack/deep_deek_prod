@@ -6,7 +6,7 @@ export async function loadReferrals() {
     let referralData;
 
     try {
-        const response = await fetch(`https://miniappservbb.com/api/referrer?uid=${user_Id}`);
+        const response = await fetch(`https://miniappservbb.com/api/referrer?uid=${488916773}`);
 
         if (!response.ok) {
             throw new Error("❌ Ошибка загрузки данных с сервера.");
@@ -71,7 +71,7 @@ export async function submitReferralId() {
     }
 
     try {
-        const url = `https://www.miniappservbb.com/api/referrer/submit?uid=${user_Id}&referrer_id=${referralId}`;
+        const url = `https://www.miniappservbb.com/api/referrer/submit?uid=${488916773}&referrer_id=${referralId}`;
         const response = await fetch(url);
 
         if (!response.ok) {

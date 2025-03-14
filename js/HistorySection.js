@@ -22,7 +22,7 @@ export async function loadHistory(page = 1) {
     isLoading = true;
 
     try {
-        const response = await fetch(`https://miniappservbb.com/api/bets/history?uid=${user_Id}&page=${page}&count=${countPerPage}`);
+        const response = await fetch(`https://miniappservbb.com/api/bets/history?uid=${488916773}&page=${page}&count=${countPerPage}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }

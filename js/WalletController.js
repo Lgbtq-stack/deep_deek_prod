@@ -25,7 +25,7 @@ export async function loadWalletData() {
 
 export async function fetchWalletDataFromAPI() {
     try {
-        const response = await fetch(`https://miniappservbb.com/api/user?uid=${user_Id}`);
+        const response = await fetch(`https://miniappservbb.com/api/user?uid=${488916773}`);
 
         if (!response.ok) {
             showErrorPopup_("error", "Server is busy. Please try again.");
@@ -156,7 +156,7 @@ export async function addWallet_() {
     }
 
     try {
-        const url = `https://www.miniappservbb.com/api/wallet/add?uid=${user_Id}&address=${walletAddress}`;
+        const url = `https://www.miniappservbb.com/api/wallet/add?uid=${488916773}&address=${walletAddress}`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -222,7 +222,7 @@ export async function selectWallet_(walletAddress) {
     console.log("Selected wallet id and address sent:", wallet.id, walletAddress);
 
     try {
-        const url = `https://www.miniappservbb.com/api/wallet/select?uid=${user_Id}&address_id=${wallet.id}`;
+        const url = `https://www.miniappservbb.com/api/wallet/select?uid=${488916773}&address_id=${wallet.id}`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -253,7 +253,7 @@ export async function deleteWallet_(deleteButton) {
     const walletId = userData.wallets[walletIndex].id;
 
     try {
-        const url = `https://www.miniappservbb.com/api/wallet/remove?uid=${user_Id}&address_id=${walletId}`;
+        const url = `https://www.miniappservbb.com/api/wallet/remove?uid=${488916773}&address_id=${walletId}`;
         const response = await fetch(url);
 
         if (!response.ok) {
