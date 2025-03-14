@@ -12,6 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeData();
 });
 
+document.addEventListener('touchmove', function (event) {
+    if (!event.target.closest('.home-section, .wallet-section, .referrals-section, .transaction-section, .history-section')) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
 function initializeData() {
     Initialize();
 
@@ -28,6 +34,11 @@ window.setActiveTab = async function (selectedTab) {
 
     try {
         const navItems = document.querySelectorAll('.nav-item');
+        const scrollToTopButton = document.getElementById("scrollToTop");
+
+        scrollToTopButton.classList.add("hide");
+        scrollToTopButton.classList.remove("show");
+
         navItems.forEach(item => item.classList.remove('active'));
 
         selectedTab.classList.add('active');

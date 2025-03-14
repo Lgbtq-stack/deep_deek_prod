@@ -157,3 +157,40 @@ function startCountdownTimer(endTime, timerElement, betId) {
     const intervalId = setInterval(updateTimer, 1000);
     activeTimers.set(betId, intervalId);
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const scrollToTopButton = document.getElementById("scrollToTop");
+    const referralSection = document.getElementById("transaction-list");
+
+    function checkScroll() {
+        if (!referralSection) return;
+
+        let scrollY = referralSection.scrollTop;
+        let canScroll = referralSection.scrollHeight > referralSection.clientHeight;
+
+        console.log("🔥 ScrollY:", scrollY, "Can Scroll:", canScroll);
+
+        if (canScroll && scrollY > 10) {
+            scrollToTopButton.classList.add("show");
+            scrollToTopButton.classList.remove("hide");
+        } else {
+            scrollToTopButton.classList.add("hide");
+            scrollToTopButton.classList.remove("show");
+        }
+    }
+
+    function scrollToTop() {
+        if (referralSection) {
+            referralSection.scrollTo({top: 0, behavior: "smooth"});
+        }
+    }
+
+    if (referralSection) {
+        referralSection.addEventListener("scroll", checkScroll);
+    }
+
+    scrollToTopButton.addEventListener("click", scrollToTop);
+
+    console.log("✅ Scroll-to-top for referrals loaded!");
+});
