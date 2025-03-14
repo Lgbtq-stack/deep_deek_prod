@@ -9,35 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     Telegram.WebApp.expand();
     tg = Telegram.WebApp;
 
-    setupSwipeToRefresh();
     initializeData();
 });
-
-function setupSwipeToRefresh() {
-    let startY = 0;
-    let isSwiping = false;
-
-    document.addEventListener("touchstart", (e) => {
-        startY = e.touches[0].clientY;
-        isSwiping = true;
-    });
-
-    document.addEventListener("touchmove", (e) => {
-        if (!isSwiping) return;
-        let moveY = e.touches[0].clientY;
-        let diff = moveY - startY;
-
-        if (diff > 100) {
-            isSwiping = false;
-            Telegram.WebApp.expand();
-            window.location.reload();
-        }
-    });
-
-    document.addEventListener("touchend", () => {
-        isSwiping = false;
-    });
-}
 
 function initializeData() {
     Initialize();
@@ -46,9 +19,7 @@ function initializeData() {
         showErrorPopup("error", "User ID is missing in the URL.");
         return false;
     }
-
 }
-
 
 let currentTab = '';
 

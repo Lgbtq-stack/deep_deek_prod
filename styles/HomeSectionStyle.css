@@ -44,7 +44,7 @@ body {
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
     flex-shrink: 0;
 }
 
