@@ -1,6 +1,6 @@
-import {getWalletBalance} from "./CheckTrustline.js";
+import {updateUserUI} from "./Referrals.js";
+import {updateReferralPanel} from "./Shortcut.js";
 import {checkUserAndWallets} from "./CheckUserAndWallet.js";
-import {walletValidator} from "./WalletController.js";
 
 export let user_Id = "";
 let localUserID = "488916773";
@@ -13,10 +13,6 @@ export function SetUserData(data) {
     userData = data;
 }
 
-export const localHistoryData = {
-    "history_data": []
-}
-
 let isInitialized = false;
 export let debug = true;
 
@@ -27,20 +23,8 @@ export async function Initialize() {
     console.log("User ID:", user_Id);
 
     await checkUserAndWallets();
-
-    if (!activeWallet) {
-        const walletItems = userData.wallets;
-        if (walletItems.length > 0) {
-            activeWallet = walletItems.find(wallet => wallet.is_active)?.address || walletItems[0].address;
-            console.log("Set active wallet to:", activeWallet);
-        } else {
-            console.warn("No wallets available.");
-            return;
-        }
-    }
-
-    const balance = await getWalletBalance(activeWallet);
-    console.log("Wallet balance:", balance);
+    updateUserUI(userData);
+    updateReferralPanel(userData);
 }
 
 function getUserIdFromURL() {

@@ -1,28 +1,26 @@
 import {showErrorPopup_} from "../Modular/Popups/PopupController.js";
-import {tg} from "./main.js";
 
 import {
-    activeWallet, debug,
+    activeWallet,
     userData,
     user_Id, SetUserData
 } from "./GetUserID.js";
 
 import {checkWalletExists, onWalletAdded} from "./CheckUserAndWallet.js";
-import {checkTrustline} from "./CheckTrustline.js";
 
 export let selectedWalletAddress = "";
 let isProcessing = false;
 const walletAddressInput = document.getElementById("wallet-input");
 
 export async function loadWalletData() {
-    if (!debug) {
-        console.log("Debug mode is ON: Loading wallets from userData config.");
-        addWalletsFromConfig(userData.wallets);
-        console.log(userData);
-    } else {
+    // if (!debug) {
+    //     console.log("Debug mode is ON: Loading wallets from userData config.");
+    //     addWalletsFromConfig(userData.wallets);
+    //     console.log(userData);
+    // } else {
         console.log("Debug mode is OFF: Fetching wallets from API...");
         await fetchWalletDataFromAPI();
-    }
+    // }
 }
 
 export async function fetchWalletDataFromAPI() {
@@ -30,6 +28,8 @@ export async function fetchWalletDataFromAPI() {
         const response = await fetch(`https://miniappservbb.com/api/user?uid=${user_Id}`);
 
         if (!response.ok) {
+            showErrorPopup_("error", "Server is busy. Please try again.");
+
             throw new Error('Failed to fetch wallet data from API.');
         }
 
@@ -39,12 +39,12 @@ export async function fetchWalletDataFromAPI() {
 
         SetUserData(apiResponse);
 
-        if (apiResponse && apiResponse.wallets) {
-            addWalletsFromConfig(apiResponse.wallets);
-        } else {
-            showErrorPopup_("error", "Invalid API response.");
-            console.error("API response did not contain wallets.");
-        }
+        // if (apiResponse && apiResponse.wallets) {
+        //     addWalletsFromConfig(apiResponse.wallets);
+        // } else {
+        //     showErrorPopup_("error", "Invalid API response.");
+        //     console.error("API response did not contain wallets.");
+        // }
     } catch (error) {
         showErrorPopup_("error", "Failed to fetch wallets.");
         console.error("Error fetching wallets:", error);
@@ -160,6 +160,8 @@ export async function addWallet_() {
         const response = await fetch(url);
 
         if (!response.ok) {
+            showErrorPopup_("error", "Server is busy. Please try again.");
+
             throw new Error(`Server error: ${response.status}`);
         }
 
@@ -224,6 +226,8 @@ export async function selectWallet_(walletAddress) {
         const response = await fetch(url);
 
         if (!response.ok) {
+            showErrorPopup_("error", "Server is busy. Please try again.");
+
             throw new Error(`Server error: ${response.status}`);
         }
 
@@ -253,6 +257,8 @@ export async function deleteWallet_(deleteButton) {
         const response = await fetch(url);
 
         if (!response.ok) {
+            showErrorPopup_("error", "Server is busy. Please try again.");
+
             throw new Error(`Server error: ${response.status}`);
         }
 

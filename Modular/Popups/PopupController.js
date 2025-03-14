@@ -5,8 +5,11 @@ export const addWalletPopup_ = document.getElementById("wallet-popup");
 export const withdrawPopup_ = document.getElementById("withdraw-popup");
 export const rechargePopup_ = document.getElementById("recharge-popup");
 export const linkAddressUrl_ = document.getElementById("link-address-popup");
+export const invitePopup_ = document.getElementById("ref-invite-popup");
+export const submitRef_ = document.getElementById("ref-submit-popup");
 
 export function showErrorPopup_(type, message) {
+
     if (type === "error") {
         errorTitle_.textContent = "⛔️ Error";
     } else if (type === "warning") {
@@ -25,14 +28,32 @@ export function openWithdrawPopup_(title = "Withdraw Funds", placeholder = "Ente
     document.getElementById('withdraw-confirm-button').innerText = buttonText;
     document.getElementById('withdraw-popup').style.display = 'flex';
     disableScroll();
+    toggleSidePanel_(true);
+
 }
 
-export function openWalletPopup_(title = "Add Wallet", placeholder = "Enter wallet address", buttonText = "Add Wallet") {
+export function openWalletPopup_(title = "Add Wallet", placeholder = "Enter wallet address", buttonText = "Add Wallet", disableClick = false) {
+    const walletPopup = document.getElementById("wallet-popup");
+
     document.getElementById('wallet-title').innerText = title;
     document.getElementById('wallet-input').placeholder = placeholder;
-    document.getElementById('wallet-popup').style.display = 'flex';
     document.getElementById('wallet-confirm-button').innerText = buttonText;
+
+    walletPopup.style.display = 'flex';
     disableScroll();
+    toggleSidePanel_(true);
+
+    let isClickDisabled = disableClick;
+
+    walletPopup.onclick = function(event) {
+        if (isClickDisabled) {
+            event.stopPropagation();
+        } else {
+            walletPopup.onclick = function() {
+                closePopup_();
+            };
+        }
+    };
 }
 
 export function openRechargePopup_() {
@@ -65,6 +86,22 @@ export function openTestPage2_() {
     } else {
         console.error("URL is empty or invalid.");
     }
+}
+
+export function openPopup_(popup_id) {
+    if (popup_id.includes("ref-invite-popup")) {
+        invitePopup_.style.display = "flex";
+
+        disableScroll_();
+    } else if (popup_id.includes("ref-submit-popup")) {
+
+        document.getElementById("referral-input").value = ""; // Очистка input
+        submitRef_.style.display = "flex";
+
+        disableScroll_();
+    }
+    toggleSidePanel_(true);
+
 }
 
 export function showToast_(message) {
@@ -106,10 +143,13 @@ export function closeErrorPopup_() {
 }
 
 export function closePopup_() {
+
     addWalletPopup_.style.display = 'none';
     withdrawPopup_.style.display = 'none';
     rechargePopup_.style.display = 'none';
-
+    invitePopup_.style.display = 'none';
+    submitRef_.style.display = 'none';
+    toggleSidePanel_(false);
     enableScroll();
 }
 
@@ -119,4 +159,11 @@ export function disableScroll_() {
 
 export function enableScroll_() {
     document.body.classList.remove('no-scroll');
+}
+
+export function toggleSidePanel_(isPopupOpen) {
+    const sidePanel = document.querySelector(".side-panel");
+
+    sidePanel.style.display = isPopupOpen ? "none" : "block";
+    console.log(isPopupOpen);
 }

@@ -11,5 +11,8 @@
     "url": "https://github.com/Lgbtq-stack/deepdeek.git"
   },
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "socket.io-client": "^4.5.4"
+  }
 }

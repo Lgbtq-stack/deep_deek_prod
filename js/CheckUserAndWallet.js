@@ -1,10 +1,11 @@
-import {debug, userData} from './GetUserID.js';
-import {openWalletPopup_, showErrorPopup_} from "../Modular/Popups/PopupController.js";
-import {addWalletsFromConfig, fetchWalletDataFromAPI, loadWalletData} from "./WalletController.js";
+import {userData} from './GetUserID.js';
+import {fetchWalletDataFromAPI} from "./WalletController.js";
 
-export function updateBalanceUI(balance) {
-    const balanceElement = document.getElementById("balance-tokens");
-    balanceElement.innerText = `Tokens: ${balance}`;
+export function updateBalanceUI() {
+    const balanceElement = document.getElementById("balance-value");
+    const balanceBotElement = document.getElementById("balance-bot");
+    balanceElement.innerText = /*"Balance: \n" + */`$${userData.balance.toFixed(2)}`;
+    balanceBotElement.innerText = "Balance in use:" + `$${userData.balance_block.toFixed(2)}`;
 }
 
 export async function checkUserAndWallets() {
@@ -13,11 +14,11 @@ export async function checkUserAndWallets() {
     await fetchWalletDataFromAPI();
 
     console.log(`Checking wallet from API...${userData}`);
-    if (!userData.wallets || userData.wallets.length === 0) {
-        await setActiveTab(document.querySelector('.nav-item.wallet'));
-        openWalletPopup_("Add Wallet", "Enter wallet address", "Add Wallet");
-        blockOtherTabs();
-    }
+    // if (!userData.wallets || userData.wallets.length === 0) {
+    //     await setActiveTab(document.querySelector('.nav-item.wallet'));
+        // openWalletPopup_("Add Wallet", "Enter wallet address", "Add Wallet", true);
+        // blockOtherTabs();
+    // }
 }
 
 function blockOtherTabs() {

@@ -4,6 +4,7 @@ import {
     copyToClipboard_,
     disableScroll_,
     enableScroll_,
+    openPopup_,
     openRechargePopup_,
     openTestPage1_,
     openTestPage2_,
@@ -11,7 +12,8 @@ import {
     openWebPage_,
     openWithdrawPopup_,
     showErrorPopup_,
-    showToast_
+    showToast_,
+    toggleSidePanel_
 } from "./PopupController.js";
 
 window.openWithdrawPopup = function(title = "Withdraw Funds", placeholder = "Enter amount", buttonText = "Confirm") {
@@ -36,6 +38,10 @@ window.openTestPage1 = function() {
 
 window.openTestPage2 = function() {
     openTestPage2_();
+}
+
+window.openPopup = function(popup_id) {
+    openPopup_(popup_id);
 }
 
 window.showErrorPopup = function(type, message) {
@@ -64,4 +70,8 @@ window.disableScroll = function() {
 
 window.enableScroll = function() {
     enableScroll_();
+}
+
+window.toggleSidePanel = function() {
+    toggleSidePanel_();
 }

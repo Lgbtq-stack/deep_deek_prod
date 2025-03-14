@@ -1,5 +1,4 @@
 import StellarSdk from 'https://cdn.jsdelivr.net/npm/@stellar/stellar-sdk/+esm';
-import {updateBalanceUI} from "./CheckUserAndWallet.js";
 const server = new StellarSdk.Horizon.Server("https://horizon.stellar.org");
 
 const assetCode = "NFT";
