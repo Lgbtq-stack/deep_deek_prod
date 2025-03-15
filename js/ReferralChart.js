@@ -1,10 +1,86 @@
-import { loadReferrals } from "./Referrals.js";
+import {loadReferrals} from "./Referrals.js";
 
-function formatChartData(chartInfo) {
-    const labels = Object.keys(chartInfo).sort().map(date => formatDate(date));
-    const data = labels.map((_, index) => Object.values(chartInfo)[index] ?? 0);
+export function updateReferralChart(chartInfo) {
+    const ctx = document.getElementById('referralChart')?.getContext('2d');
 
-    return { labels, data };
+    if (!ctx) {
+        console.error("❌ referralChart not found in DOM!");
+        return;
+    }
+
+    if (window.referralChart instanceof Chart) {
+        window.referralChart.destroy();
+    }
+
+    const sortedDates = Object.keys(chartInfo).sort();
+    const labels = sortedDates.map(date => formatDate(date));
+    const data = sortedDates.map(date => chartInfo[date] ?? 0);
+
+    console.log("📊 Labels:", labels);
+    console.log("📈 Data:", data);
+
+    const maxDataValue = Math.max(...data);
+    const yAxisMax = maxDataValue === 0 ? 10 : getYAxisMax(maxDataValue);
+    const stepSize = getYAxisStep(maxDataValue);
+
+    window.referralChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Bonuses Growth',
+                data: data,
+                borderColor: '#47a14c',
+                borderWidth: 3,
+                pointBackgroundColor: '#47a14c',
+                pointRadius: 6,
+                showLine: true,
+                spanGaps: false,
+                fill: true,
+                backgroundColor: 'rgba(111, 207, 151, 0.2)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 0
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: yAxisMax,
+                    ticks: {
+                        stepSize: stepSize,
+                        color: '#E0E0E0'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#E0E0E0'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#FFFFFF'
+                    }
+                }
+            }
+        }
+    });
+
+    console.log("✅ Chart updated with light colors!");
 }
 
 function formatDate(dateStr) {
@@ -16,6 +92,7 @@ function formatDate(dateStr) {
 }
 
 function getYAxisStep(totalBalance) {
+    if (totalBalance <= 10) return 1;
     if (totalBalance <= 100) return 10;
     if (totalBalance <= 1000) return 100;
     if (totalBalance <= 10000) return 1000;
@@ -27,59 +104,6 @@ function getYAxisMax(totalBalance) {
     return Math.ceil(totalBalance / step) * step;
 }
 
-export function updateReferralChart(chartInfo) {
-    const ctx = document.getElementById('referralChart')?.getContext('2d');
-
-    if (!ctx) {
-        console.error("❌ referralChart not found DOM!");
-        return;
-    }
-
-    if (window.referralChart instanceof Chart) {
-        window.referralChart.destroy();
-    }
-
-    const { labels, data } = formatChartData(chartInfo);
-
-    console.log("📊 Labels:", labels);
-    console.log("📈 Data:", data);
-
-    window.referralChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Total Bonuses Growth',
-                data: data,
-                borderColor: 'green',
-                borderWidth: 2,
-                pointBackgroundColor: 'green',
-                pointRadius: 5,
-                showLine: true,
-                spanGaps: false,
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    min: 0,
-                    max: getYAxisMax(Math.max(...data)),
-                    ticks: {
-                        stepSize: getYAxisStep(Math.max(...data))
-                    }
-                }
-            }
-        }
-    });
-
-    console.log("✅ Chart updated!");
-}
-
-// 🚀 Инициализация графика
 export async function initReferralChart() {
     console.log("📊 Init initReferralChart...");
     let referralData = await loadReferrals();
