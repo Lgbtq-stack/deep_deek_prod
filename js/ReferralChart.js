@@ -45,7 +45,7 @@ export function updateReferralChart(chartInfo) {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    left: 0
+                    right: 0,
                 }
             },
             scales: {

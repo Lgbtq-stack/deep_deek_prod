@@ -93,7 +93,7 @@
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-    transition: bottom 0.3s ease-in-out;
+    transition: bottom 0.1s ease-in-out;
     z-index: 1;
     text-wrap: nowrap;
 
@@ -208,3 +208,6 @@
     transform: translateY(10px);
 }
 
+#referralChart {
+    transform: translateX(-15px); /* Сдвигаем влево на 30px */
+}
