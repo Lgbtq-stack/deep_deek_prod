@@ -46,12 +46,14 @@ function updateReferralsUI(data) {
     totalBonusesElement.innerText = `$${totalBonuses.toFixed(2)}`;
 
     Object.entries(data.referral_transactions).forEach(([id, bonus]) => {
+        const [, username] = id.split("|"); // 👈 разделяем строку по "|", берем вторую часть (username)
+
         const referralItem = document.createElement("div");
         referralItem.classList.add("referral-item");
 
         referralItem.innerHTML = `
-            <p>👤 <strong>User:</strong> #${id}</p>
-            <p>💰 <strong>Earned:</strong> ~$${bonus.toFixed(2)}</p>
+            <p>👤 <strong>${username}</strong> </p> 
+            <p>💰 <strong>$${bonus.toFixed(2)}</strong> </p>
         `;
 
         referralList.appendChild(referralItem);
