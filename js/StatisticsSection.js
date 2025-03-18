@@ -24,20 +24,18 @@ function drawBalanceChart(balance) {
         { label: 'Bets \n', value: balance.bets }
     ];
 
-    const processedData = rawData.map(item => {
-        if (item.label === 'Top Up' && item.value === 0) {
-            return { ...item, displayValue: 1 };
-        }
-        return { ...item, displayValue: item.value };
-    });
-
-    const total = processedData.reduce((acc, item) => acc + item.displayValue, 0) || 1;
-
     const dataArray = [['Type', 'Amount']];
 
-    processedData.forEach(item => {
-        const percent = ((item.displayValue / total) * 100).toFixed(1);
-        dataArray.push([`${item.label} (${percent}%)`, item.displayValue]);
+    const totalRaw = rawData.reduce((acc, item) => acc + item.value, 0);
+    const total = totalRaw || 1;
+
+    rawData.forEach(item => {
+        let displayValue = item.value;
+        if (item.value === 0) {
+            displayValue = 0.000001; // почти не видно в диаграмме
+        }
+        const percent = ((item.value / total) * 100).toFixed(1);
+        dataArray.push([`${item.label} (${percent}%)`, displayValue]);
     });
 
     const data = google.visualization.arrayToDataTable(dataArray);
@@ -45,6 +43,7 @@ function drawBalanceChart(balance) {
     const options = {
         pieHole: 0.4,
         is3D: true,
+        sliceVisibilityThreshold: 0,
         pieSliceText: 'percentage',
         pieSliceTextStyle: {
             color: '#fff',

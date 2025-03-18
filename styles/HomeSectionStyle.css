@@ -370,11 +370,11 @@ body {
     }
 
     .nav-icon {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
 
     .footer {
-        gap: 12px; /* минимальный отступ */
+        gap: 20px; /* минимальный отступ */
     }
 }
