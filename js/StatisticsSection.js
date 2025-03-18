@@ -18,27 +18,42 @@ export async function fetchAndRenderStatistics() {
 }
 
 function drawBalanceChart(balance) {
-    const data = google.visualization.arrayToDataTable([
-        ['Type', 'Amount'],
-        ['Top Up', balance.top_up],
-        ['Referral', balance.referral],
-        ['Bets', balance.bets]
-    ]);
+    const rawData = [
+        { label: 'Top Up', value: balance.top_up },
+        { label: 'Referral', value: balance.referral },
+        { label: 'Bets', value: balance.bets }
+    ];
+
+    const processedData = rawData.map(item => {
+        if (item.label === 'Top Up' && item.value === 0) {
+            return { ...item, displayValue: 1 };
+        }
+        return { ...item, displayValue: item.value };
+    });
+
+    const total = processedData.reduce((acc, item) => acc + item.displayValue, 0) || 1;
+
+    const dataArray = [['Type', 'Amount']];
+
+    processedData.forEach(item => {
+        const percent = ((item.displayValue / total) * 100).toFixed(1);
+        dataArray.push([`${item.label} (${percent}%)`, item.displayValue]);
+    });
+
+    const data = google.visualization.arrayToDataTable(dataArray);
 
     const options = {
-        pieHole: 1,
+        pieHole: 0.4,
         is3D: true,
         pieSliceText: 'percentage',
         pieSliceTextStyle: {
             color: '#fff',
-            fontSize: 16,
+            fontSize: 18,
+            bold: true
         },
-        colors: ['#42a5f5', '#ffa726'],
-        chartArea: {
-            width: '90%',
-            height: '90%'
-        },
-        legend: { position: 'bottom', textStyle: { color: '#ccc',fontSize: 16 } },
+        colors: ['#42a5f5', '#ffa726', '#66bb6a'],
+        chartArea: { width: '90%', height: '90%' },
+        legend: { position: 'right', textStyle: { color: '#ccc', fontSize: 18 } },
         backgroundColor: { fill: 'transparent' },
         title: '',
     };
@@ -48,26 +63,37 @@ function drawBalanceChart(balance) {
 }
 
 function drawBetsChart(betsInfo) {
+    const total = betsInfo.win_total + betsInfo.lose_total;
+    const winPercent = ((betsInfo.win_total / total) * 100).toFixed(1);
+    const losePercent = ((betsInfo.lose_total / total) * 100).toFixed(1);
+
     const data = google.visualization.arrayToDataTable([
         ['Result', 'Count'],
-        ['Wins', betsInfo.win_total],
-        ['Loses', betsInfo.lose_total]
+        [`Wins (${winPercent}%)`, betsInfo.win_total],
+        [`Loses (${losePercent}%)`, betsInfo.lose_total]
     ]);
 
     const options = {
-        pieHole: 1,
+        pieHole: 0.4,
         is3D: true,
         pieSliceText: 'percentage',
         pieSliceTextStyle: {
             color: '#fff',
-            fontSize: 16,
+            fontSize: 18,
+            bold: true
         },
         colors: ['#8bc34a', '#f44336'],
         chartArea: {
             width: '90%',
             height: '90%'
         },
-        legend: { position: 'bottom', textStyle: { color: '#ccc',fontSize: 16  }},
+        legend: {
+            position: 'right',
+            textStyle: {
+                color: '#ccc',
+                fontSize: 18,
+            }
+        },
         backgroundColor: { fill: 'transparent' },
         title: '',
     };

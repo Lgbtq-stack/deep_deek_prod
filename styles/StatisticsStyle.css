@@ -8,18 +8,17 @@
 .main-title {
     margin: 10px 0 10px 0;
     font-size: 24px;
-    color: #ccc;
+    color: var(--white);
 }
 
 .sub-title {
     margin: 10px 0 5px 0;
     font-size: 20px;
-    color: #ccc;
+    color: var(--white);
 }
 
 .chart {
     width: 100%;
-    max-width: 1000px;
     height: auto;
     margin: 0 auto 20px auto;
     background: transparent;
@@ -27,11 +26,11 @@
 
 @media (max-width: 480px) {
     .main-title {
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .sub-title {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .chart {

@@ -364,10 +364,17 @@ body {
     z-index: 999;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
+    .footer .nav-item {
+        padding: 8px 10px 30px; /* еще меньше паддинг */
+    }
 
-}
+    .nav-icon {
+        width: 30px;
+        height: 30px;
+    }
 
-@media (max-width: 400px) {
-
+    .footer {
+        gap: 7px; /* минимальный отступ */
+    }
 }
