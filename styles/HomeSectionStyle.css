@@ -36,8 +36,8 @@ html, body {
     height: 100%;
     background-color: var(--body);
     color: var(--white);
-    overflow: hidden; /* Убираем прокрутку всей страницы */
-    touch-action: none; /* Блокируем свайпы, вызывающие скролл всей страницы */
+    overflow: hidden;
+    touch-action: none; /**/
 
 }
 
@@ -362,4 +362,12 @@ body {
     font-size: 18px;
     font-weight: bold;
     z-index: 999;
+}
+
+@media (max-width: 600px) {
+
+}
+
+@media (max-width: 400px) {
+
 }

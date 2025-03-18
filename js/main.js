@@ -2,6 +2,7 @@ import {GetUserID, Initialize} from "./GetUserID.js";
 import {loadHistory} from "./HistorySection.js";
 import {loadReferrals} from "./Referrals.js";
 import {updateBalanceUI} from "./CheckUserAndWallet.js";
+import {fetchAndRenderStatistics} from "./StatisticsSection.js";
 
 export let tg = null;
 
@@ -47,7 +48,8 @@ window.setActiveTab = async function (selectedTab) {
             selectedTab.classList.contains('wallet') ? 'wallet' :
                 selectedTab.classList.contains('transaction') ? 'transaction' :
                     selectedTab.classList.contains('referrals') ? 'referrals' :
-                        selectedTab.classList.contains('history') ? 'history' : null;
+                        selectedTab.classList.contains('history') ? 'history' :
+                            selectedTab.classList.contains('statistics') ? 'statistics' : null;
 
         if (newTab === currentTab) {
             await hideLoader();
@@ -56,7 +58,7 @@ window.setActiveTab = async function (selectedTab) {
 
         currentTab = newTab;
 
-        document.querySelectorAll('.home-section, .wallet-section, .transaction-section, .history-section, .referrals-section')
+        document.querySelectorAll('.home-section, .wallet-section, .transaction-section, .history-section, .referrals-section, .statistics-section')
             .forEach(section => {
                 section.classList.add('hidden');
                 section.style.display = "none";
@@ -89,6 +91,8 @@ window.setActiveTab = async function (selectedTab) {
             await initReferralChart();
         } else if (currentTab === 'history') {
             await loadHistory();
+        } else if (currentTab === 'statistics') {
+            await fetchAndRenderStatistics();
         }
 
     } catch (error) {

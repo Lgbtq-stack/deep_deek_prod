@@ -6,6 +6,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@10.5.1/lib/stellar-sdk.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <!--Styles -->
     <link rel="stylesheet" href="styles/HomeSectionStyle.css">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="styles/HistoryStyle.css">
     <link rel="stylesheet" href="styles/TransactionStyle.css">
     <link rel="stylesheet" href="styles/ShortcutStyle.css">
+    <link rel="stylesheet" href="styles/StatisticsStyle.css">
     <link rel="stylesheet" href="styles/ReferralsSectionStyle.css">
     <link rel="stylesheet" href="Modular/Popups/ErrorPopUpStyle.css">
     <link rel="stylesheet" href="Modular/Popups/CommonPopup.css">
@@ -141,8 +143,18 @@
 
     <!-- History Section -->
     <div id="history-content" class="history-section hidden">
-
     </div>
+
+    <!-- Statistics Section -->
+    <div id="statistics-content" class="statistics-section hidden">
+        <h2 class="main-title">Statistics</h2>
+        <h2 class="sub-title">Balance Overview</h2>
+        <div id="balanceChart" class="chart"></div>
+
+        <h2 class="sub-title">Bets Overview</h2>
+        <div id="betsChart" class="chart"></div>
+    </div>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -160,6 +172,9 @@
         </div>
         <div class="nav-item history" onclick="setActiveTab(this)">
             <img src="content/history.png" alt="History" class="nav-icon">
+        </div>
+        <div class="nav-item statistics" onclick="setActiveTab(this)">
+            <img src="content/statistics.png" alt="Statistics" class="nav-icon">
         </div>
     </footer>
 
