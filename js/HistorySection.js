@@ -78,8 +78,8 @@ export async function loadHistory(page = 1) {
             historyContent.className = 'history-content';
 
             const betTypeText = entry.betType === "Up"
-                ? "📈 <span style='color: #36c345; font-weight: bold;'>Bullish ⬆️</span>"
-                : "📉 <span style='color: #c33636; font-weight: bold;'>Bearish ⬇️</span>";
+                ? "📈 <span style='color: #36c345; font-weight: bold;'>UP ⬆️</span>"
+                : "📉 <span style='color: #c33636; font-weight: bold;'>DOWN ⬇️</span>";
 
             const dataFields = {
                 "📊 Trend": betTypeText,
