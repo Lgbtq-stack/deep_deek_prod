@@ -79,8 +79,8 @@ body {
 .history-section {
     flex: 1;
     width: 100%;
-    overflow-y: auto; /* Разрешаем скролл */
-    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -366,7 +366,7 @@ body {
 
 @media (max-width: 500px) {
     .footer .nav-item {
-        padding: 8px 10px 40px; /* еще меньше паддинг */
+        padding: 8px 10px 40px;
     }
 
     .nav-icon {
@@ -375,6 +375,6 @@ body {
     }
 
     .footer {
-        gap: 20px; /* минимальный отступ */
+        gap: 20px;
     }
 }

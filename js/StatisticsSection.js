@@ -13,7 +13,7 @@ export async function fetchAndRenderStatistics() {
         google.charts.setOnLoadCallback(() => drawBalanceChart(balance));
         google.charts.setOnLoadCallback(() => drawBetsChart(betsInfo));
     } catch (error) {
-        console.error('Ошибка загрузки данных:', error);
+        console.error('Data load error:', error);
     }
 }
 
