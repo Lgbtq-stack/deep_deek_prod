@@ -366,7 +366,7 @@ body {
 
 @media (max-width: 500px) {
     .footer .nav-item {
-        padding: 8px 10px 30px; /* еще меньше паддинг */
+        padding: 8px 10px 40px; /* еще меньше паддинг */
     }
 
     .nav-icon {
