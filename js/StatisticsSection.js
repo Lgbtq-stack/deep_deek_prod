@@ -19,9 +19,9 @@ export async function fetchAndRenderStatistics() {
 
 function drawBalanceChart(balance) {
     const rawData = [
-        { label: 'Top Up', value: balance.top_up },
-        { label: 'Referral', value: balance.referral },
-        { label: 'Bets', value: balance.bets }
+        { label: 'Top Up \n', value: balance.top_up },
+        { label: 'Referral \n', value: balance.referral },
+        { label: 'Bets \n', value: balance.bets }
     ];
 
     const processedData = rawData.map(item => {
@@ -53,7 +53,7 @@ function drawBalanceChart(balance) {
         },
         colors: ['#42a5f5', '#ffa726', '#66bb6a'],
         chartArea: { width: '90%', height: '90%' },
-        legend: { position: 'right', textStyle: { color: '#ccc', fontSize: 18 } },
+        legend: { position: 'right', textStyle: { color: '#ccc', fontSize: 14 } },
         backgroundColor: { fill: 'transparent' },
         title: '',
     };
@@ -69,8 +69,8 @@ function drawBetsChart(betsInfo) {
 
     const data = google.visualization.arrayToDataTable([
         ['Result', 'Count'],
-        [`Wins (${winPercent}%)`, betsInfo.win_total],
-        [`Loses (${losePercent}%)`, betsInfo.lose_total]
+        [`Wins \n (${winPercent}%)`, betsInfo.win_total],
+        [`Loses \n (${losePercent}%)`, betsInfo.lose_total]
     ]);
 
     const options = {
@@ -91,7 +91,7 @@ function drawBetsChart(betsInfo) {
             position: 'right',
             textStyle: {
                 color: '#ccc',
-                fontSize: 18,
+                fontSize: 14,
             }
         },
         backgroundColor: { fill: 'transparent' },
