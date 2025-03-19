@@ -5,6 +5,14 @@
     align-items: center;
     overflow-y: auto;
     max-height: 100vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 0px;
+
+}
+
+.statistics-section::-webkit-scrollbar {
+    display: none;
 }
 
 .main-title {
@@ -14,19 +22,29 @@
 }
 
 .sub-title {
-    margin: 20px 0 10px;
+    margin: 20px 0 0;
     font-size: 20px;
     color: #ccc;
 }
 
 .chart {
+    margin: 0;
     width: 100%;
     max-width: 400px;
-    min-width: 250px;
+    min-width: 300px;
     height: 400px;
-    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px !important;
+    overflow: hidden;
 }
 
+.chart svg {
+    max-height: 300px !important;
+    width: 100% !important;
+    display: block;
+}
 
 @media (max-width: 480px) {
     .main-title {

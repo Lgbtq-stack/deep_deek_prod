@@ -18,7 +18,7 @@ socket.on("connect_error", (error) => {
 });
 
 socket.on("update", (bets) => {
-    console.log("🔥 Обновление ставок:", bets);
+//    console.log("🔥 Обновление ставок:", bets);
 
     updateTransactionsUI(bets);
 });

@@ -32,7 +32,7 @@ function drawBalanceChart(balance) {
     rawData.forEach(item => {
         let displayValue = item.value;
         if (item.value === 0) {
-            displayValue = 0.000001; // почти не видно в диаграмме
+            displayValue = 0.000001;
         }
         const percent = ((item.value / total) * 100).toFixed(1);
         dataArray.push([`${item.label} (${percent}%)`, displayValue]);
@@ -51,8 +51,9 @@ function drawBalanceChart(balance) {
             bold: true
         },
         colors: ['#42a5f5', '#ffa726', '#66bb6a'],
-        chartArea: { width: '90%', height: '90%' },
-        legend: { position: 'right', textStyle: { color: '#ccc', fontSize: 14 } },
+        chartArea: { left: 50, top: 0, width: '90%', height: '90%' },
+        forceIFrame: true,
+        legend: { position: 'right', textStyle: { color: '#ccc', fontSize: 14 },alignment: 'center'  },
         backgroundColor: { fill: 'transparent' },
         title: '',
     };
@@ -83,6 +84,8 @@ function drawBetsChart(betsInfo) {
         },
         colors: ['#8bc34a', '#f44336'],
         chartArea: {
+            left: 50,
+            top: 0,
             width: '90%',
             height: '90%'
         },
@@ -91,7 +94,8 @@ function drawBetsChart(betsInfo) {
             textStyle: {
                 color: '#ccc',
                 fontSize: 14,
-            }
+            },
+            alignment: 'center'
         },
         backgroundColor: { fill: 'transparent' },
         title: '',
